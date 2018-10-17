@@ -292,6 +292,21 @@ Set up (the latest version of) [HAProxy](http://www.haproxy.org/) in Ubuntu syst
 * `haproxy_acl_files.{n}.dest`: [required]: The remote path of the file (e.g. `/etc/haproxy/acl/api.map`)
 * `haproxy_acl_files.{n}.content`: [default: `[]`]: The content (lines) of the file (e.g. `['v1.0 be_alpha', 'v1.1 be_bravo']`)
 
+* `haproxy_resolvers`: [default: `[]`]: DNS resolvers declarations
+* `haproxy_resolvers.{n}.name`: [required]: The name of the resolver
+* `haproxy_resolvers.{n}.nameservers`: [required] resolver nameservers declarations
+* `haproxy_resolvers.{n}.nameservers.{n}.id`: [required]: nameserver DNS id (e.g.: `dns1`)
+* `haproxy_resolvers.{n}.nameservers.{n}.host`: [required]: nameserver DNS host IP + port (e.g.: `10.0.1.1:53`)
+* `haproxy_resolvers.{n}.resolve_retries`: [optional]: resolver resolve_retries number (e.g.: `3`)
+* `haproxy_resolvers.{n}.accepted_payload_size`: [optional]: resolver accepted_payload size  (e.g.: `512`)
+* `haproxy_resolvers.{n}.timeouts`: [optional] resolver timeouts declarations
+* `haproxy_resolvers.{n}.timeouts.{n}.event`: [required]: timeout event (accepted values: `resolve` or `retry` )
+* `haproxy_resolvers.{n}.timeouts.{n}.time`: [required]: timeout time (e.g.: `1s`)
+* `haproxy_resolvers.{n}.holds`: [optional] resolver holds declarations
+* `haproxy_resolvers.{n}.holds.{n}.status`: [required]: hold status (accepted values: `nx`, `other`, `refused`, `timeout`, `valid`, `obsolete`)
+* `haproxy_resolvers.{n}.holds.{n}.period`: [required]: hold period (e.g.: `30s`)
+
+
 ## Dependencies
 
 None
