@@ -1,0 +1,18 @@
+{% for resolver in haproxy_resolvers %}
+resolvers {{ resolver.name }}
+{%   for nameserver in resolver.nameservers %}
+  nameserver {{ nameserver['id'] }} {{ nameserver['host'] }}
+{%   endfor %}
+{%   if resolver['resolve_retries'] is defined %}
+  resolve_retries       {{ resolver['resolve_retries'] | default(3) }}
+{%   endif %}
+{%   if resolver['accepted_payload_size'] is defined %}
+  accepted_payload_size {{ resolver['accepted_payload_size'] | default(512) }}
+{%   endif %}
+{%   for hold in resolver.holds | default([]) %}
+  nameserver {{ hold['status'] }} {{ timeout['period'] }}
+{%   endfor %}
+{%   for timeout in resolver.timeouts | default([]) %}
+  nameserver {{ timeout['event'] }} {{ timeout['time'] }}
+{%   endfor %}
+{% endfor %}

@@ -80,3 +80,6 @@ haproxy_userlists: []
 
 # ACL files
 haproxy_acl_files: []
+
+# DNS resolvers section
+haproxy_resolvers: []
